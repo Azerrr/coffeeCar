@@ -4,12 +4,18 @@ import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Trajets {
 
 	@Id
 	private int id;
+	@ManyToOne
+	private Utilisateur conducteur;
+	@ManyToMany
+	private Utilisateur passagers;
 	private String villeDepart;
 	private String villeArrivee;
 	private ArrayList<String> etapes;
