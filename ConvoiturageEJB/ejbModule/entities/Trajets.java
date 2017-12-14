@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Trajets {
@@ -14,8 +15,7 @@ public class Trajets {
 	private int id;
 	@ManyToOne
 	private Utilisateur conducteur;
-	//@ManyToMany
-	//@JoinTable(name="reservations")
+	@OneToOne
 	private Utilisateur passagers;
 	private String villeDepart;
 	private String villeArrivee;

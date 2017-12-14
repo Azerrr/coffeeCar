@@ -13,7 +13,7 @@
 		<form method="post">
 			Login : <br/><input type='text' name='login'/>
 			<br/>
-			Password : <br/><input type="password" name='password'/>
+			Password : <br/><input type="password" name='passwd'/>
 			<br/>
 			<button type='submit' name='todo' value='connect'>Connexion</button>
 		</form>
