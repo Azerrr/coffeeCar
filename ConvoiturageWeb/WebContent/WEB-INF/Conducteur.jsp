@@ -8,6 +8,58 @@
 </head>
 
 <body>
+	<h2>Créer un Trajet</h2>
+	
+	<div>
+		<table>
+			<tr>
+				<td><label>Type de Véhicule :</label></td>
+				<td></td>
+			</tr>
+			
+			<tr>
+				<td><label>Date départ :</label></td>
+				<td></td>
+			</tr>
+			
+			<tr>
+				<td><label>Heure départ :</label></td>
+				<td></td>
+			</tr>
+			
+			<tr>
+				<td><label>Ville Départ</label></td>
+				<td></td>
+			</tr>
+			
+			<tr>
+				<td><label>Ville Arrivé</label></td>
+				<td></td>
+			</tr>
+			
+			<tr>
+				<td><label>Etapes</label></td>
+				<td></td>
+			</tr>
+			
+			<tr>
+				<td><label>Tarifs</label></td>
+				<td></td>
+			</tr>
+			
+			<tr>
+				<td><label>Nombre de Places</label></td>
+				<td></td>
+			</tr>		
+			
+		
+		
+		
+		
+		</table>
+	
+	</div>
+
 
 </body>
 </html>
