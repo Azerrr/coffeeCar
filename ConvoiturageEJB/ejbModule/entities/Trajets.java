@@ -3,21 +3,20 @@ package entities;
 import java.util.ArrayList;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Trajets {
 
-	@Id
+	@Id @GeneratedValue
 	private int id;
 	@ManyToOne
 	private Utilisateur conducteur;
-	@ManyToMany
-	@JoinTable(name="reservations")
-	private ArrayList<Utilisateur> passagers;
+	//@ManyToMany
+	//@JoinTable(name="reservations")
+	private Utilisateur passagers;
 	private String villeDepart;
 	private String villeArrivee;
 	private ArrayList<String> etapes;
@@ -32,6 +31,12 @@ public class Trajets {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public Utilisateur getPassagers() {
+		return passagers;
+	}
+	public void setPassagers(Utilisateur passagers) {
+		this.passagers = passagers;
 	}
 	public String getVilleDepart() {
 		return villeDepart;
