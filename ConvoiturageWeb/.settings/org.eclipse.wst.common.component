@@ -2,6 +2,9 @@
     <wb-module deploy-name="ConvoiturageWeb">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="ConvoiturageEJB.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ConvoiturageEJB/ConvoiturageEJB">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="ConvoiturageWeb"/>
         <property name="java-output-path" value="/ConvoiturageWeb/build/classes"/>
     </wb-module>

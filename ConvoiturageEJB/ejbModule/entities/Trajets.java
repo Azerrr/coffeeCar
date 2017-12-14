@@ -12,10 +12,10 @@ public class Trajets {
 
 	@Id
 	private int id;
-	@ManyToOne
-	private Utilisateur conducteur;
-	@ManyToMany
-	private Utilisateur passagers;
+	//@ManyToOne
+	//private Utilisateur conducteur;
+	//@ManyToMany
+	//private ArrayList<Utilisateur> passagers;
 	private String villeDepart;
 	private String villeArrivee;
 	private ArrayList<String> etapes;

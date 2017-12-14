@@ -3,6 +3,7 @@
 	<name>ConvoiturageWeb</name>
 	<comment></comment>
 	<projects>
+		<project>ConvoiturageEJB</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
