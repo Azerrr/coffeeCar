@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
@@ -12,10 +13,11 @@ public class Trajets {
 
 	@Id
 	private int id;
-	//@ManyToOne
-	//private Utilisateur conducteur;
-	//@ManyToMany
-	//private ArrayList<Utilisateur> passagers;
+	@ManyToOne
+	private Utilisateur conducteur;
+	@ManyToMany
+	@JoinTable(name="reservations")
+	private ArrayList<Utilisateur> passagers;
 	private String villeDepart;
 	private String villeArrivee;
 	private ArrayList<String> etapes;
