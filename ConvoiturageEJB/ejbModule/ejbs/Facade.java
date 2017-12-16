@@ -17,6 +17,7 @@ public class Facade {
 	@PersistenceContext(unitName="monUnite")
 	EntityManager em;
 	
+	/*Vérifie si un utilisateur est présent dans la base des utilisateurs*/
 	public boolean validUser(String login, String passwd) {
 		// Requête paramétrée
 		Query q = em.createQuery("from Utilisateur u where u.identifiant=:login"
@@ -27,6 +28,29 @@ public class Facade {
 		return(q.getResultList().size()==1);
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Integer> getUserRole(String login, String passwd) {
+		Query q = em.createQuery("select role from Utilisateur u where u.identifiant=:login"
+				+ " and u.motDePasse=:passwd");
+		q.setParameter("login", login);
+		q.setParameter("passwd", passwd);
+		return (List<Integer>)q.getResultList();
+	}
+	
+	/*Renvoi la liste des types de véhicules disponibles*/
+	@SuppressWarnings("unchecked")
+	public ArrayList<String> getTypesVehicules(){
+		Query q = em.createQuery("from Vehicule v");
+		return (ArrayList<String>)q.getResultList();
+	}
+	
+	/*Rnvoi la liste des villes déservies*/
+	@SuppressWarnings("unchecked")
+	public ArrayList<String> getVilles(){
+		Query q = em.createQuery("from Ville v");
+		return (ArrayList<String>)q.getResultList();
+	}
+		
 	@SuppressWarnings("unchecked")
 	public List<Trajets> findTrajets(String date, String heure, String villeDepart, int nbPlaces) {
 		// Requête paramétrée

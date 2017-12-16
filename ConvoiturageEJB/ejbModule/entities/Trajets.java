@@ -25,12 +25,20 @@ public class Trajets {
 	private ArrayList<Integer> tarifs;
 	private int nbPlaces;
 	private String typeVehicule;
+	private String Modele;
 	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getModele() {
+		return Modele;
+	}
+	public void setModele(String modele) {
+		Modele = modele;
 	}
 	public Utilisateur getPassagers() {
 		return passagers;
