@@ -50,6 +50,19 @@ public class Facade {
 		Query q = em.createQuery("from Ville v");
 		return (ArrayList<String>)q.getResultList();
 	}
+	
+	public void addVilles(String ville) {
+		Ville v = new Ville();
+		v.setVille(ville);
+		em.persist(v);
+	}
+	
+	public void addGabarit(String type) {
+		Vehicule v = new Vehicule();
+		v.setType(type);
+		em.persist(v);
+	}
+	
 		
 	@SuppressWarnings("unchecked")
 	public List<Trajets> findTrajets(String date, String heure, String villeDepart, int nbPlaces) {

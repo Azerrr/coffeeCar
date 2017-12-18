@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ejb.EJB;
 import ejbs.Facade;
-import entities.Utilisateur;
 
 /**
  * Servlet implementation class MainServlet
@@ -74,6 +72,7 @@ public class MainServlet extends HttpServlet {
 			}
 			return;
 		}
+		
 		///////////////////////////////////////////
 		
 		if(todo == null) {
@@ -92,11 +91,19 @@ public class MainServlet extends HttpServlet {
 			case "retourAcceuil":
 				request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
 				break;
+			case "disconnect":
+				request.getSession().setAttribute("login", null);
+				request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
+				break;
 			case "ajoutGabaritButton":
-				AddGabaritAdmin(request,response);
+				String type = request.getParameter("ajoutGabarit");
+				facade.addGabarit(type);
+				request.getRequestDispatcher("/WEB-INF/Administrateur.jsp").forward(request, response);
 				break;
 			case "ajoutVilleButton":
-				AddVilleAdmin(request,response);
+				String ville = request.getParameter("ajoutVille");
+				facade.addVilles(ville);
+				request.getRequestDispatcher("/WEB-INF/Administrateur.jsp").forward(request, response);
 				break;
 			default:
 				request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
@@ -111,8 +118,7 @@ public class MainServlet extends HttpServlet {
 	
 	
 	private void AddGabaritAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+				
 	}
 	
 	private void AddVilleAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

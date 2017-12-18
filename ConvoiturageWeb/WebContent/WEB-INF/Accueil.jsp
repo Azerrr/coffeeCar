@@ -17,6 +17,10 @@
 	if(request.getSession().getAttribute("login") != null){
 	%>
 		<h2>Bienvenu <%= request.getSession().getAttribute("login") %></h2>
+		
+		<form method="post">
+			<button type='submit' name='todo' value='disconnect'>Déconnexion</button>		
+		</form>
 	
 		<%
 		/*If admin*/
