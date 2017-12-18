@@ -12,7 +12,10 @@
 </head>
 
 <body>
-
+	<form method="post">	
+		<button type='submit' name='task' value='initButton'>initButton</button>
+		</form>
+	
 	<% 
 	if(request.getSession().getAttribute("login") != null){
 	%>
@@ -26,39 +29,24 @@
 		/*If admin*/
 		if((int)request.getSession().getAttribute("role") <= 1){
 		%>
+		<form method="post">	
+		<button type='submit' name='todo' value='initButton'>initButton</button>
+		</form>
 		<form method="post">
 			<button type='submit' name='todo' value='admin'>Page Administrateur</button>		
 		</form>
 		<%
 		}
 		%>
-	
-		<%
-		/*If conducteur*/
-		if((int)request.getSession().getAttribute("role") <= 2){
-		%>
+
 		<form method="post">
 			<button type='submit' name='todo' value='conducteur'>Page Conducteur</button>		
 		</form>
-		<%
-		}
-	
-		%>
-		
-		<%
-		/*If user*/
-		if((int)request.getSession().getAttribute("role") <= 3){
-		%>
 		<form method="post">
-			<button type='submit' name='todo' value='user'>Page Utilisateur</button>		
+			<button type='submit' name='todo' value='user'>Mes Trajets</button>		
 		</form>
-		<%
-		}
-	
-		%>
 
-	
-	<%
+	<%	
 	}else {
 	%>
 	<h2>Connexion</h2>
@@ -85,7 +73,7 @@
 			<table>
 				<tr>
 					<td><label for="date">Date :</label></td>
-			String		<td><input id="date" type="date" name="date"></td>
+					<td><input id="date" type="date" name="date"></td>
 				</tr>
 				
 				<tr>
@@ -109,7 +97,7 @@
 				</tr>
 							
 				<tr>
-					<td><button type='submit' name='todo' value='rechercheTrajet'>Rechercher Trajet</button></td>
+					<td><button type='submit' name='task' value='rechercheTrajet'>Rechercher Trajet</button></td>
 				</tr>
 				
 			</table>
@@ -119,10 +107,26 @@
 		
 		<div>
 			<jsp:useBean id="resultatRecherche" type="java.util.ArrayList<String>" scope="request" />
+			<form method="post">
+			<table>
+			
 			<c:forEach items="${resultatRecherche}" var="ci">
-    		${ci.villeArrive}<br/>
+			
+			<tr>
+				<td>${ci.date}</td>
+				<td>${ci.heure}</td>
+				<td>${ci.villeDepart}</td>
+				<td>${ci.villeArrive}</td>
+				<td>${ci.tarifs.get(0)}</td>
+				<td>${ci.nbPlaces}</td>
+				<td>${ci.typeVehicule}</td>
+				<td>${ci.modele}</td>
+				<td><button type='submit' name='reservation' value='${ci.id}'>Réserver</button></td>
+			</tr>
 			</c:forEach>
-		
+			</table>
+			</form>
+			
 		</div>
 
 				

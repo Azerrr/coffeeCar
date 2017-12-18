@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -13,9 +14,12 @@ public class Trajets {
 
 	@Id @GeneratedValue
 	private int id;
+	
 	@ManyToOne
 	private Utilisateur conducteur;
-	@OneToOne
+	
+	@ManyToOne
+	@JoinTable(name="Reservations")
 	private Utilisateur passagers;
 	private String villeDepart;
 	private String villeArrive;
@@ -46,12 +50,14 @@ public class Trajets {
 	public void setModele(String modele) {
 		this.modele = modele;
 	}
+	
 	public Utilisateur getPassagers() {
 		return passagers;
 	}
 	public void setPassagers(Utilisateur passagers) {
 		this.passagers = passagers;
 	}
+	
 	public String getVilleDepart() {
 		return villeDepart;
 	}

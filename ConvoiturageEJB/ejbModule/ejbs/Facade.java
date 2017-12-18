@@ -17,6 +17,28 @@ public class Facade {
 	@PersistenceContext(unitName="monUnite")
 	EntityManager em;
 	
+	public void initdbTrajets() {
+		ArrayList<Integer> tarifs = new ArrayList<Integer>();
+		tarifs.add(5);
+		addTrajet("eric", "Bourges", "Paris", null, "2017-12-06", "04:04", tarifs, 1, "Urbaine", "twingo");
+		addTrajet("remi", "Bourges", "Paris", null, "2017-12-06", "05:04", tarifs, 2, "Urbaine", "twingo");
+		addTrajet("maxime", "Bourges", "Paris", null, "2017-12-06", "06:04", tarifs, 3, "Urbaine", "twingo");
+		addTrajet("guillaume", "Bourges", "Paris", null, "2017-12-06", "07:04", tarifs, 4, "Urbaine", "twingo");
+		addTrajet("eric", "Bourges", "Paris", null, "2017-12-06", "10:04", tarifs, 5, "Urbaine", "twingo");
+		addTrajet("eric", "Bourges", "Paris", null, "2017-12-06", "09:04", tarifs, 6, "Urbaine", "twingo");
+		
+	}
+	
+	public List<Trajets> getReservation(String login){
+		Query res =em.createQuery("from Utilisateur u where u.identifiant=:login");
+		res.setParameter("login", login);
+		
+		Utilisateur u = (Utilisateur)res.getSingleResult();
+		List<Trajets> trajets = (List<Trajets>)u.getTrajets();
+		trajets.size();
+		return trajets;
+	}
+	
 	/*Vérifie si un utilisateur est présent dans la base des utilisateurs*/
 	public boolean validUser(String login, String passwd) {
 		// Requête paramétrée
@@ -99,13 +121,21 @@ public class Facade {
 
 	}
 	
-	public void reserverTrajet (Trajets trajet, Utilisateur voyageur) {
-		Query q = em.createQuery("update Trajet t"
-				+ " set t.passager =:voyageur,"
-				+ " t.nbPlace = 0"
-				+ " where t.id=:idTrajet");
-		q.setParameter("voyageur", voyageur);
-		q.setParameter("idTrajet", trajet.getId());
+	public void reserverTrajet (int idTrajet, String loginUser) {
+		Query trajetfind = em.createQuery("from Trajets t where t.id=:id");
+		trajetfind.setParameter("id", idTrajet);
+		
+		Query userfind = em.createQuery("from Utilisateur u where u.identifiant=:login");
+		userfind.setParameter("login", loginUser);
+		
+		Utilisateur u = (Utilisateur)userfind.getSingleResult();
+		Trajets t = (Trajets)trajetfind.getSingleResult();
+		
+		t.setPassagers(u);
+		t.setNbPlaces(0);
+		em.persist(t);
 	}
+		
+
 	
 }

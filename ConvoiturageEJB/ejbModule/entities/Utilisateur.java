@@ -1,7 +1,12 @@
 package entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Utilisateur {
@@ -9,9 +14,18 @@ public class Utilisateur {
 	@Id
 	private String identifiant;
 	private String motDePasse;
-	private int role; // (1=ADMIN, 2=CONDUCTEUR, 3=UTILISATEUR)
 	
+	@OneToMany(mappedBy="passagers")
+	private List<Trajets> trajets = new ArrayList<>();
+	private int role; // (1=ADMIN, 2=UTILISATEUR)
 	
+
+	public List<Trajets> getTrajets() {
+		return trajets;
+	}
+	public void setTrajets(List<Trajets> trajets) {
+		this.trajets = trajets;
+	}
 	
 	public String getIdentifiant() {
 		return identifiant;

@@ -38,19 +38,36 @@ public class MainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		
 		/*Gestion des listes choix pour la recherche d'un trajet*/
 		//////////////////////////////////////
 		request.setAttribute("villes", facade.getVilles());
 		request.setAttribute("typesVehicules", facade.getTypesVehicules());
 		request.setAttribute("resultatRecherche", new ArrayList<String>());
+		
+		
 		/////////////////////////////////////		
 		
 		/*Gestion de l'authentification*/
 		//////////////////////////////////////
 		String currentLogin = (String) request.getSession().getAttribute("login");
 		String todo = request.getParameter("todo");
+		String task = request.getParameter("task");
+		String reservation = request.getParameter("reservation");
 		
+		if(task != null) {
+			switch(task) {
+				case "initButton":
+					facade.initdbTrajets();
+					break;
+				case "rechercheTrajet":
+					findTrajet(request, response);
+					break;	
+			}
+		}
+		
+				
 		if(currentLogin == null) {
 			if(todo !=null && todo.equals("connect")) {
 				String login = request.getParameter("login");
@@ -61,21 +78,28 @@ public class MainServlet extends HttpServlet {
 					if(userRole.size() == 1) {
 						request.getSession().setAttribute("role", (int)userRole.get(0));
 					}else {
-						request.getSession().setAttribute("role", null);
+						request.getSession().setAttribute("role", null);						
 					}
-					
-					//request.getRequestDispatcher("/WEB-INF/Conducteur.jsp").forward(request, response);
+
+					request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
+				}else {
 					request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
 				}
 				
-			}
-			else {
-				request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
-			}
+			}else {			
+				request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);	
+				
+			}	
 			return;
 		}
 		
+		
+		
 		///////////////////////////////////////////
+		
+		if(reservation != null && currentLogin != null) {
+			facade.reserverTrajet(Integer.parseInt(reservation), currentLogin);
+		}
 		
 		if(todo == null) {
 			request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
@@ -88,6 +112,7 @@ public class MainServlet extends HttpServlet {
 				request.getRequestDispatcher("/WEB-INF/Conducteur.jsp").forward(request, response);
 				break;
 			case "user" :
+				request.setAttribute("trajetReserve", facade.getReservation(currentLogin));
 				request.getRequestDispatcher("/WEB-INF/Utilisateur.jsp").forward(request, response);
 				break;
 			case "retourAcceuil":
@@ -110,8 +135,10 @@ public class MainServlet extends HttpServlet {
 			case "addTrajet":
 				addTrajet(request, response);
 				break;
-			case "rechercheTrajet":
-				findTrajet(request, response);
+			case "initButton":
+				/*init Db trajets*/
+				facade.initdbTrajets();
+				request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
 				break;
 			default:
 				request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
@@ -119,6 +146,9 @@ public class MainServlet extends HttpServlet {
 			}
 			
 		}
+		
+
+		
 		
 		
 		
@@ -129,7 +159,6 @@ public class MainServlet extends HttpServlet {
 		String villeDepart = request.getParameter("villeDepart");
 		String villeArrive = request.getParameter("villeArrive");		
 		request.setAttribute("resultatRecherche", facade.findTrajets(date, villeDepart, villeArrive));
-		request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
 	}
 	
 	
