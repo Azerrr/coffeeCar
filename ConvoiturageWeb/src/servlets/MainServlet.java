@@ -79,10 +79,43 @@ public class MainServlet extends HttpServlet {
 		if(todo == null) {
 			request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
 		}else {
+			switch(todo) {
+			case "admin":
+				request.getRequestDispatcher("/WEB-INF/Administrateur.jsp").forward(request, response);
+				break;
+			case "conducteur":
+				request.getRequestDispatcher("/WEB-INF/Conducteur.jsp").forward(request, response);
+				break;
+			case "user" :
+				request.getRequestDispatcher("/WEB-INF/Utilisateur.jsp").forward(request, response);
+				break;
+			case "retourAcceuil":
+				request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
+				break;
+			case "ajoutGabaritButton":
+				AddGabaritAdmin(request,response);
+				break;
+			case "ajoutVilleButton":
+				AddVilleAdmin(request,response);
+				break;
+			default:
+				request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
+				break;
+			}
 			
 		}
 		
 		
+		
+	}
+	
+	
+	private void AddGabaritAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+	}
+	
+	private void AddVilleAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}
 

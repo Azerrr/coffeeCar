@@ -8,6 +8,40 @@
 	</head>
 
 	<body>
+		<h2>Administrateur</h2>
+		<div>
+			<form method="post">
+			<button type='submit' name='todo' value='retourAcceuil'>Retour Acceuil</button>		
+			</form>
+			
+		
+		<table>
+			<tr>
+			<form method="post">
+				<td><label for="ajoutGabarit">Ajout Gabarit :</label></td>
+				<td><input id="ajoutGabarit" type="text" name="ajoutGabarit" /></td>
+				<td><button type='submit' name='todo' value='ajoutGabaritButton'>Ajout Gabarit</button></td>
+			</form>
+			</tr>
+			
+			
+			
+			<tr>
+			<form method="post">
+				<td><label for="ajoutVille">Ajout Ville :</label></td>
+				<td><input id="ajoutVille" type="text" name="ajoutVille" /></td>
+				<td><button type='submit' name='todo' value='ajoutVilleButton'>Ajouter Ville</button></td>
+			</form>
+			</tr>
+			
+			
+			
+		</table>
+
+			
+		
+		
+		</div>
 
 
 	</body>

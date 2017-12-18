@@ -9,6 +9,10 @@
 	
 	<body>
 		<h2>Réservations</h2>
+		<form method="post">
+			<button type='submit' name='todo' value='retourAcceuil'>Retour Acceuil</button>		
+			</form>
+		
 		<div>
 			<ul>
 				<c:forEach items="${listeReservations}" var="reserv">

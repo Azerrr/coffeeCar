@@ -86,7 +86,7 @@
 				
 				<tr>
 					<td><label for="villeDepart">Ville de Départ :</label></td>
-					<td><select name="villeDepart">
+					<td><select id="villeDepart" name="villeDepart">
 						<c:forEach items="${villes}" var="ci">
     						<option>${ci.ville}</option>
 						</c:forEach>
@@ -96,7 +96,7 @@
 				
 				<tr>
 					<td><label for="villeArrive">Ville d'Arrivé :</label></td>
-					<td><select name="villeArrive">
+					<td><select id="villeArrive" name="villeArrive">
 						<c:forEach items="${villes}" var="ci">
     						<option>${ci.ville}</option>
 						</c:forEach>
@@ -106,7 +106,7 @@
 				
 				<tr>
 					<td><label for="typeVehicules">Type de Véhicule :</label></td>
-					<td><select name ="typesVehicules">
+					<td><select id="typeVehicules" name="typesVehicules">
 						<c:forEach items="${typesVehicules}" var="ci">
 							<option>${ci.type}</option>						
 						</c:forEach>
