@@ -28,6 +28,7 @@ public class Facade {
 		return(q.getResultList().size()==1);
 	}
 	
+	
 	@SuppressWarnings("unchecked")
 	public List<Integer> getUserRole(String login, String passwd) {
 		Query q = em.createQuery("select role from Utilisateur u where u.identifiant=:login"
@@ -65,38 +66,37 @@ public class Facade {
 	
 		
 	@SuppressWarnings("unchecked")
-	public List<Trajets> findTrajets(String date, String heure, String villeDepart, int nbPlaces) {
+	public ArrayList<String> findTrajets(String date, String villeDepart, String villeArrive) {
 		// Requête paramétrée
 		Query q = em.createQuery("from Trajets t where t.date=:date"
-				+ " and t.heure=:heure"
 				+ " and t.villeDepart=:villeDepart"
-				+ " and t.nbPlaces>=:nbPlaces");
+				+ " and t.villeArrive=:villeArrive"
+				+ " order by t.heure");
 		q.setParameter("date", date);
-		q.setParameter("heure", heure);
 		q.setParameter("villeDepart", villeDepart);
-		q.setParameter("nbPlaces", nbPlaces);
-		
-		return (List<Trajets>)q.getResultList();
+		q.setParameter("villeArrive", villeArrive);
+		return (ArrayList<String>)q.getResultList();
 	}
 	
-	public void addTrajet(Utilisateur conducteur, String villeDepart, String villeArrivee, ArrayList<String> etapes,
-			String date, String heure, ArrayList<Integer> tarifs, int nbPlaces, String typeVehicule) {
+	public void addTrajet(String login, String villeDepart, String villeArrive, ArrayList<String> etapes,
+			String date, String heure, ArrayList<Integer> tarifs, int nbPlaces, String typeVehicule, String modele) {
 		// Requête paramétrée
-		Query q = em.createQuery("insert into Trajets t (conducteur, villeDepart, villeArrivee,"
-				+ " etapes, date, heure, tarifs, nbPlaces, typeVehicule)"
-				+ "values (:conducteur, :villeDepart, :villeArrivee,"
-				+ " :etapes, :date, :heure, :tarifs, :nbPlaces, :typeVehicule)");
-		q.setParameter("conducteur", conducteur);
-		q.setParameter("villeDepart", villeDepart);
-		q.setParameter("villeArrivee", villeArrivee);
-		q.setParameter("etapes", etapes);
-		q.setParameter("date", date);
-		q.setParameter("heure", heure);
-		q.setParameter("tarifs", tarifs);
-		q.setParameter("nbPlaces", nbPlaces);
-		q.setParameter("typeVehicule", typeVehicule);
+		Query q = em.createQuery("from Utilisateur u where u.identifiant=:login");
+		q.setParameter("login", login);
+		Utilisateur u = (Utilisateur)q.getSingleResult();
+		Trajets t = new Trajets();
+		t.setConducteur(u);
+		t.setVilleDepart(villeDepart);
+		t.setVilleArrive(villeArrive);
+		t.setEtapes(etapes);
+		t.setDate(date);
+		t.setHeure(heure);
+		t.setTarifs(tarifs);
+		t.setNbPlaces(nbPlaces);
+		t.setTypeVehicule(typeVehicule);
+		t.setModele(modele);
+		em.persist(t);
 
-		return;
 	}
 	
 	public void reserverTrajet (Trajets trajet, Utilisateur voyageur) {

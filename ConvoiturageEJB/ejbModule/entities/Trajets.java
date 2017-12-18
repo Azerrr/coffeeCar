@@ -18,14 +18,14 @@ public class Trajets {
 	@OneToOne
 	private Utilisateur passagers;
 	private String villeDepart;
-	private String villeArrivee;
+	private String villeArrive;
 	private ArrayList<String> etapes;
 	private String date;
 	private String heure;
 	private ArrayList<Integer> tarifs;
 	private int nbPlaces;
 	private String typeVehicule;
-	private String Modele;
+	private String modele;
 	
 	public int getId() {
 		return id;
@@ -34,11 +34,17 @@ public class Trajets {
 		this.id = id;
 	}
 	
+	public Utilisateur getConducteur() {
+		return conducteur;
+	}
+	public void setConducteur(Utilisateur conducteur) {
+		this.conducteur = conducteur;
+	}
 	public String getModele() {
-		return Modele;
+		return modele;
 	}
 	public void setModele(String modele) {
-		Modele = modele;
+		this.modele = modele;
 	}
 	public Utilisateur getPassagers() {
 		return passagers;
@@ -52,11 +58,11 @@ public class Trajets {
 	public void setVilleDepart(String villeDepart) {
 		this.villeDepart = villeDepart;
 	}
-	public String getVilleArrivee() {
-		return villeArrivee;
+	public String getVilleArrive() {
+		return villeArrive;
 	}
-	public void setVilleArrivee(String villeArrivee) {
-		this.villeArrivee = villeArrivee;
+	public void setVilleArrive(String villeArrive) {
+		this.villeArrive = villeArrive;
 	}
 	public ArrayList<String> getEtapes() {
 		return etapes;

@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -42,6 +43,7 @@ public class MainServlet extends HttpServlet {
 		//////////////////////////////////////
 		request.setAttribute("villes", facade.getVilles());
 		request.setAttribute("typesVehicules", facade.getTypesVehicules());
+		request.setAttribute("resultatRecherche", new ArrayList<String>());
 		/////////////////////////////////////		
 		
 		/*Gestion de l'authentification*/
@@ -105,6 +107,12 @@ public class MainServlet extends HttpServlet {
 				facade.addVilles(ville);
 				request.getRequestDispatcher("/WEB-INF/Administrateur.jsp").forward(request, response);
 				break;
+			case "addTrajet":
+				addTrajet(request, response);
+				break;
+			case "rechercheTrajet":
+				findTrajet(request, response);
+				break;
 			default:
 				request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
 				break;
@@ -116,14 +124,34 @@ public class MainServlet extends HttpServlet {
 		
 	}
 	
-	
-	private void AddGabaritAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				
+	private void findTrajet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String date = request.getParameter("date");
+		String villeDepart = request.getParameter("villeDepart");
+		String villeArrive = request.getParameter("villeArrive");		
+		request.setAttribute("resultatRecherche", facade.findTrajets(date, villeDepart, villeArrive));
+		request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
 	}
 	
-	private void AddVilleAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	private void addTrajet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String currentLogin = (String) request.getSession().getAttribute("login");
+		String modele = request.getParameter("modeleVehicule");
+		String type = request.getParameter("typesVehicules");
+		String date = request.getParameter("date");
+		String heure = request.getParameter("time");
+		String vDepart = request.getParameter("villeDepart");
+		String vArrive = request.getParameter("villeArrive");
+		ArrayList<Integer> tarif = new ArrayList<Integer>();
+		tarif.add(Integer.parseInt(request.getParameter("tarif")));
+		int nbplaces = Integer.parseInt(request.getParameter("placesLibres"));
 		
+		if(currentLogin != null) {
+			facade.addTrajet(currentLogin, vDepart, vArrive, null, date, heure, tarif, nbplaces, type, modele);
+			request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
+		}
+						
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

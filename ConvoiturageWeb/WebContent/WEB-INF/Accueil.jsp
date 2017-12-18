@@ -85,7 +85,7 @@
 			<table>
 				<tr>
 					<td><label for="date">Date :</label></td>
-					<td><input id="date" type="date" name="date"></td>
+			String		<td><input id="date" type="date" name="date"></td>
 				</tr>
 				
 				<tr>
@@ -107,25 +107,23 @@
 						</select>
 					</td>
 				</tr>
-				
+							
 				<tr>
-					<td><label for="typeVehicules">Type de Véhicule :</label></td>
-					<td><select id="typeVehicules" name="typesVehicules">
-						<c:forEach items="${typesVehicules}" var="ci">
-							<option>${ci.type}</option>						
-						</c:forEach>
-						</select>
-					</td>
-				</tr>
-				
-				<tr>
-					<td></td>
-					<td></td>
+					<td><button type='submit' name='todo' value='rechercheTrajet'>Rechercher Trajet</button></td>
 				</tr>
 				
 			</table>
 		
 		</form>
+		
+		
+		<div>
+			<jsp:useBean id="resultatRecherche" type="java.util.ArrayList<String>" scope="request" />
+			<c:forEach items="${resultatRecherche}" var="ci">
+    		${ci.villeArrive}<br/>
+			</c:forEach>
+		
+		</div>
 
 				
 		

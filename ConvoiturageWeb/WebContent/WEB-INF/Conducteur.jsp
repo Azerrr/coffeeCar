@@ -25,12 +25,12 @@
 		<table>
 			<tr>
 				<td><label for="modeleVehicule">Modèle du véhicule :</label></td>
-				<td><input id="modeleVehicule" type="text" name="modeleVehicule" /></td>
+				<td><input id="modeleVehicule" type="text" name="modeleVehicule" required="required" /></td>
 			</tr>
 		
 			<tr>
 				<td><label for="typesVehicules">Type de Véhicule :</label></td>
-				<td><select id="typesVehicules" name="typesVehicules">
+				<td><select id="typesVehicules" name="typesVehicules" required="required">
 						<c:forEach items="${typesVehicules}" var="ci">
 							<option>${ci.type}</option>						
 						</c:forEach>
@@ -40,17 +40,17 @@
 			
 			<tr>
 				<td><label for="date" >Date départ :</label></td>
-				<td><input id="date" type="date" name="date"></td>
+				<td><input id="date" type="date" name="date" required="required"></td>
 			</tr>
 			
 			<tr>
 				<td><label for="time">Heure départ :</label></td>
-				<td><input id="time" type="time" name="time"></td>
+				<td><input id="time" type="time" name="time" required="required"></td>
 			</tr>
 			
 			<tr>
 				<td><label for="villeDepart">Ville Départ</label></td>
-				<td><select id="villeDepart" name="villeDepart">
+				<td><select id="villeDepart" name="villeDepart" required="required">
 						<c:forEach items="${villes}" var="ci">
     						<option>${ci.ville}</option>
 						</c:forEach>
@@ -60,7 +60,7 @@
 			
 			<tr>
 				<td><label for="villeArrive">Ville Arrivé</label></td>
-				<td><select id="villeArrive" name="villeArrive">
+				<td><select id="villeArrive" name="villeArrive" required="required">
 						<c:forEach items="${villes}" var="ci">
     						<option>${ci.ville}</option>
 						</c:forEach>
@@ -75,15 +75,21 @@
 			
 			<tr>
 				<td><label for="tarif">Tarifs</label></td>
-				<td><input id="tarif" type="number" name="tarif" min="0" max="200"></td>
+				<td><input id="tarif" type="number" name="tarif" min="0" max="200" required="required"></td>
 			</tr>
 			
 			<tr>
 				<td><label for="placesLibres">Nombre de Places</label></td>
-				<td><input id="placesLibres" type="number" name="placesLibres" min="0" max="10"></td>
-			</tr>		
+				<td><input id="placesLibres" type="number" name="placesLibres" min="0" max="10" required="required"></td>
+			</tr>	
+			
+			<tr>
+				<td><button type='submit' name='todo' value='addTrajet'>Ajouter le Trajet</button></td>
+			</tr>	
 			
 		</table>
+		
+		
 	</form>
 	
 	</div>
