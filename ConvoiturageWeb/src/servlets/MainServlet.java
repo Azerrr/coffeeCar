@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ejb.EJB;
 import ejbs.Facade;
+import entities.Etape;
 
 /**
  * Servlet implementation class MainServlet
@@ -59,7 +60,7 @@ public class MainServlet extends HttpServlet {
 		if(task != null) {
 			switch(task) {
 				case "initButton":
-					facade.initdbTrajets();
+					//facade.initdbTrajets();
 					break;
 				case "rechercheTrajet":
 					findTrajet(request, response);
@@ -137,7 +138,7 @@ public class MainServlet extends HttpServlet {
 				break;
 			case "initButton":
 				/*init Db trajets*/
-				facade.initdbTrajets();
+				//facade.initdbTrajets();
 				request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
 				break;
 			default:
@@ -170,12 +171,33 @@ public class MainServlet extends HttpServlet {
 		String heure = request.getParameter("time");
 		String vDepart = request.getParameter("villeDepart");
 		String vArrive = request.getParameter("villeArrive");
-		ArrayList<Integer> tarif = new ArrayList<Integer>();
-		tarif.add(Integer.parseInt(request.getParameter("tarif")));
+		int tarifTotal = Integer.parseInt(request.getParameter("tarif"));
+		String etape1 = request.getParameter("etape1");
+		String etape2 = request.getParameter("etape2");
+		String etape3 = request.getParameter("etape3");
+		String tarif1 = request.getParameter("tarif1");
+		String tarif2 = request.getParameter("tarif2");
+		String tarif3 = request.getParameter("tarif3");
+		Etape etp1 = new Etape();
+		etp1.setEtape(etape1);
+		etp1.setTarif(Integer.parseInt(tarif1));
+		Etape etp2 = new Etape();
+		etp2.setEtape(etape2);
+		etp2.setTarif(Integer.parseInt(tarif2));
+		Etape etp3 = new Etape();
+		etp3.setEtape(etape3);
+		etp3.setTarif(Integer.parseInt(tarif3));
+		List<Etape> etapes = new ArrayList<>();
+		etapes.add(etp1);
+		etapes.add(etp2);
+		etapes.add(etp3);
+		
+		//ArrayList<Integer> tarif = new ArrayList<Integer>();
+		//tarif.add(Integer.parseInt(request.getParameter("tarif")));
 		int nbplaces = Integer.parseInt(request.getParameter("placesLibres"));
 		
 		if(currentLogin != null) {
-			facade.addTrajet(currentLogin, vDepart, vArrive, null, date, heure, tarif, nbplaces, type, modele);
+			facade.addTrajet(currentLogin, vDepart, vArrive, etapes, date, heure, tarifTotal, nbplaces, type, modele);
 			request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
 		}
 						

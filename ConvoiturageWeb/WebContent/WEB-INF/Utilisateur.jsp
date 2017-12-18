@@ -19,10 +19,20 @@
 		<div>
 		<jsp:useBean id="trajetReserve" type="java.util.List<String>" scope="request" />
 			
-		<c:forEach items="${trajetReserve}" var="ci">
-    		${ci.id}<br/>
-		</c:forEach>
-
+		<table>
+			<c:forEach items="${trajetReserve}" var="ci">
+				<tr>
+					<td>${ci.id}</td>
+					<td>${ci.date}</td>
+					<td>${ci.heure}</td>
+					<td>${ci.villeDepart}</td>	
+					<td>${ci.villeArrive}</td>	
+					<td>${ci.tarifTotal}</td>
+					<td>${ci.typeVehicule}</td>
+					<td>${ci.modele}</td>	
+				</tr>
+			</c:forEach>
+		</table>
 
 
 		</div>

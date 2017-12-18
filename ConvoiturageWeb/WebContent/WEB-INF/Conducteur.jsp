@@ -67,15 +67,56 @@
 					</select>
 				</td>
 			</tr>
-			
 			<tr>
-				<td><label>Etapes</label></td>
-				<td></td>
+				<td><label for="tarif">Tarifs total</label></td>
+				<td><input id="tarif" type="number" name="tarif" min="0" max="200" required="required"></td>
 			</tr>
 			
 			<tr>
-				<td><label for="tarif">Tarifs</label></td>
-				<td><input id="tarif" type="number" name="tarif" min="0" max="200" required="required"></td>
+				<td><label>Etape 1</label></td>
+				<td>
+					<select id="etape1" name="etape1">
+						<option>default</option>
+						<c:forEach items="${villes}" var="ci">
+    						<option>${ci.ville}</option>
+						</c:forEach>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td><label for="tarif1">Tarif étape 1</label></td>
+				<td><input id="tarif1" type="number" name="tarif1" min="0" max="200" required="required"></td>
+			</tr>
+			<tr>
+				<td><label>Etape 2</label></td>
+				<td>
+					<select id="etape2" name="etape2">
+						<option>default</option>
+						<c:forEach items="${villes}" var="ci">
+    						<option>${ci.ville}</option>
+						</c:forEach>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td><label for="tarif2">Tarif étape 2</label></td>
+				<td><input id="tarif2" type="number" name="tarif2" min="0" max="200" required="required"></td>
+			</tr>
+			<tr>
+				<td><label>Etape 3</label></td>
+				<td>
+					<select id="etape3" name="etape3">
+						<option>default</option>
+						<c:forEach items="${villes}" var="ci">
+    						<option>${ci.ville}</option>
+						</c:forEach>
+					</select>
+				</td>
+			</tr>
+			
+			<tr>
+				<td><label for="tarif3">Tarif étape 3</label></td>
+				<td><input id="tarif3" type="number" name="tarif3" min="0" max="200" required="required"></td>
 			</tr>
 			
 			<tr>

@@ -17,22 +17,20 @@ public class Facade {
 	@PersistenceContext(unitName="monUnite")
 	EntityManager em;
 	
-	public void initdbTrajets() {
-		ArrayList<Integer> tarifs = new ArrayList<Integer>();
-		tarifs.add(5);
-		addTrajet("eric", "Bourges", "Paris", null, "2017-12-06", "04:04", tarifs, 1, "Urbaine", "twingo");
-		addTrajet("remi", "Bourges", "Paris", null, "2017-12-06", "05:04", tarifs, 2, "Urbaine", "twingo");
-		addTrajet("maxime", "Bourges", "Paris", null, "2017-12-06", "06:04", tarifs, 3, "Urbaine", "twingo");
-		addTrajet("guillaume", "Bourges", "Paris", null, "2017-12-06", "07:04", tarifs, 4, "Urbaine", "twingo");
-		addTrajet("eric", "Bourges", "Paris", null, "2017-12-06", "10:04", tarifs, 5, "Urbaine", "twingo");
-		addTrajet("eric", "Bourges", "Paris", null, "2017-12-06", "09:04", tarifs, 6, "Urbaine", "twingo");
+	/*public void initdbTrajets() {
+
+		addTrajet("eric", "Bourges", "Paris", null, "2017-12-06", "04:04", 2, 1, "Urbaine", "twingo");
+		addTrajet("remi", "Bourges", "Paris", null, "2017-12-06", "05:04", 5, 2, "Urbaine", "twingo");
+		addTrajet("maxime", "Bourges", "Paris", null, "2017-12-06", "06:04", 3, 3, "Urbaine", "twingo");
+		addTrajet("guillaume", "Bourges", "Paris", null, "2017-12-06", "07:04", 4, 4, "Urbaine", "twingo");
+		addTrajet("eric", "Bourges", "Paris", null, "2017-12-06", "10:04", 8, 5, "Urbaine", "twingo");
+		addTrajet("eric", "Bourges", "Paris", null, "2017-12-06", "09:04", 4, 6, "Urbaine", "twingo");
 		
-	}
+	}*/
 	
 	public List<Trajets> getReservation(String login){
 		Query res =em.createQuery("from Utilisateur u where u.identifiant=:login");
-		res.setParameter("login", login);
-		
+		res.setParameter("login", login); 
 		Utilisateur u = (Utilisateur)res.getSingleResult();
 		List<Trajets> trajets = (List<Trajets>)u.getTrajets();
 		trajets.size();
@@ -93,6 +91,7 @@ public class Facade {
 		Query q = em.createQuery("from Trajets t where t.date=:date"
 				+ " and t.villeDepart=:villeDepart"
 				+ " and t.villeArrive=:villeArrive"
+				+ " and t.nbPlaces > 0"
 				+ " order by t.heure");
 		q.setParameter("date", date);
 		q.setParameter("villeDepart", villeDepart);
@@ -100,8 +99,18 @@ public class Facade {
 		return (ArrayList<String>)q.getResultList();
 	}
 	
-	public void addTrajet(String login, String villeDepart, String villeArrive, ArrayList<String> etapes,
-			String date, String heure, ArrayList<Integer> tarifs, int nbPlaces, String typeVehicule, String modele) {
+	public void addTrajet(String login, String villeDepart, String villeArrive, List<Etape> etapes,
+			String date, String heure, int tarif, int nbPlaces, String typeVehicule, String modele) {
+		// Récupérations des étapes en BDD
+		List<Etape> etps = new ArrayList<>();
+		for (int i = 0; i < 3; i++) {
+			Etape etp = etapes.get(i);
+			if(etp.getEtape() != "default") {
+				em.persist(etp);
+				etps.add(etp);
+			}
+		}
+		
 		// Requête paramétrée
 		Query q = em.createQuery("from Utilisateur u where u.identifiant=:login");
 		q.setParameter("login", login);
@@ -110,10 +119,10 @@ public class Facade {
 		t.setConducteur(u);
 		t.setVilleDepart(villeDepart);
 		t.setVilleArrive(villeArrive);
-		t.setEtapes(etapes);
+		t.setTarifTotal(tarif);
+		t.setEtapes(etps);
 		t.setDate(date);
 		t.setHeure(heure);
-		t.setTarifs(tarifs);
 		t.setNbPlaces(nbPlaces);
 		t.setTypeVehicule(typeVehicule);
 		t.setModele(modele);

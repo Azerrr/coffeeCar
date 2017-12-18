@@ -1,32 +1,31 @@
 package entities;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Trajets {
 
 	@Id @GeneratedValue
 	private int id;
-	
 	@ManyToOne
 	private Utilisateur conducteur;
-	
 	@ManyToOne
 	@JoinTable(name="Reservations")
 	private Utilisateur passagers;
 	private String villeDepart;
 	private String villeArrive;
-	private ArrayList<String> etapes;
+	private int tarifTotal;
+	@OneToMany
+	private List<Etape> etapes;
 	private String date;
 	private String heure;
-	private ArrayList<Integer> tarifs;
 	private int nbPlaces;
 	private String typeVehicule;
 	private String modele;
@@ -38,6 +37,12 @@ public class Trajets {
 		this.id = id;
 	}
 	
+	public int getTarifTotal() {
+		return tarifTotal;
+	}
+	public void setTarifTotal(int tarifTotal) {
+		this.tarifTotal = tarifTotal;
+	}
 	public Utilisateur getConducteur() {
 		return conducteur;
 	}
@@ -70,10 +75,10 @@ public class Trajets {
 	public void setVilleArrive(String villeArrive) {
 		this.villeArrive = villeArrive;
 	}
-	public ArrayList<String> getEtapes() {
+	public List<Etape> getEtapes() {
 		return etapes;
 	}
-	public void setEtapes(ArrayList<String> etapes) {
+	public void setEtapes(List<Etape> etapes) {
 		this.etapes = etapes;
 	}
 	public String getDate() {
@@ -87,12 +92,6 @@ public class Trajets {
 	}
 	public void setHeure(String heure) {
 		this.heure = heure;
-	}
-	public ArrayList<Integer> getTarifs() {
-		return tarifs;
-	}
-	public void setTarifs(ArrayList<Integer> tarifs) {
-		this.tarifs = tarifs;
 	}
 	public int getNbPlaces() {
 		return nbPlaces;

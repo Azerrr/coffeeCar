@@ -8,7 +8,7 @@ insert into Utilisateur (identifiant, motDePasse, role) values ('guillaume', 'az
 
 insert into Ville (ville) values ('Bourges');
 insert into Ville (ville) values ('Blois');
-insert into Ville (ville) values ('Orléans');
+insert into Ville (ville) values ('Orleans');
 insert into Ville (ville) values ('Chartres');
 insert into Ville (ville) values ('Paris');
 insert into Ville (ville) values ('Lille');
@@ -17,6 +17,6 @@ insert into Vehicule (type) values ('Urbaine');
 insert into Vehicule (type) values ('Compacte');
 insert into Vehicule (type) values ('SUV');
 insert into Vehicule (type) values ('Break');
-insert into Vehicule (type) values ('Routière');
+insert into Vehicule (type) values ('Routiere');
 insert into Vehicule (type) values ('Fourgonnette');
 

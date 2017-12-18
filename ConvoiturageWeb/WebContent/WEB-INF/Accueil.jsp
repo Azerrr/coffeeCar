@@ -117,7 +117,7 @@
 				<td>${ci.heure}</td>
 				<td>${ci.villeDepart}</td>
 				<td>${ci.villeArrive}</td>
-				<td>${ci.tarifs.get(0)}</td>
+				<td>${ci.tarifTotal}</td>
 				<td>${ci.nbPlaces}</td>
 				<td>${ci.typeVehicule}</td>
 				<td>${ci.modele}</td>
