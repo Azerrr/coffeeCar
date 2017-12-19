@@ -9,6 +9,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Accueil</title>
+<style>
+	th, td{
+		border-style: solid;
+    	border-width: 0px 0px 1px 1px;
+	}
+</style>
 </head>
 
 <body>
@@ -110,14 +116,33 @@
 			<form method="post">
 			<table>
 			
+			<tr>
+				<th>Date</th>
+				<th>Heure</th>
+				<th>Départ</th>
+				<th>Etape 1</th>
+				<th>Tarif 1</th>
+				<th>Etape 2</th>
+				<th>Tarif 2</th>
+				<th>Etape 3</th>
+				<th>Tarif 3</th>
+				<th>Places Libres</th>
+				<th>Gabarit</th>
+				<th>Modèle</th>
+			</tr>
+			
 			<c:forEach items="${resultatRecherche}" var="ci">
 			
 			<tr>
 				<td>${ci.date}</td>
 				<td>${ci.heure}</td>
 				<td>${ci.villeDepart}</td>
-				<td>${ci.villeArrive}</td>
-				<td>${ci.tarifTotal}</td>
+				<td>${ci.etapes.get(0).getEtape()}</td>
+				<td>${ci.etapes.get(0).getTarif()} € </td>
+				<td>${ci.etapes.get(1).getEtape()}</td>
+				<td>${ci.etapes.get(1).getTarif()} € </td>
+				<td>${ci.etapes.get(2).getEtape()}</td>
+				<td>${ci.etapes.get(2).getTarif()} € </td>
 				<td>${ci.nbPlaces}</td>
 				<td>${ci.typeVehicule}</td>
 				<td>${ci.modele}</td>

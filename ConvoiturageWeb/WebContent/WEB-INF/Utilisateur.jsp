@@ -26,8 +26,12 @@
 					<td>${ci.date}</td>
 					<td>${ci.heure}</td>
 					<td>${ci.villeDepart}</td>	
-					<td>${ci.villeArrive}</td>	
-					<td>${ci.tarifTotal}</td>
+					<td>${ci.etapes.get(0).getEtape()}</td>
+					<td>${ci.etapes.get(0).getTarif()} € </td>
+					<td>${ci.etapes.get(1).getEtape()}</td>
+					<td>${ci.etapes.get(1).getTarif()} € </td>
+					<td>${ci.etapes.get(2).getEtape()}</td>
+					<td>${ci.etapes.get(2).getTarif()} € </td>
 					<td>${ci.typeVehicule}</td>
 					<td>${ci.modele}</td>	
 				</tr>

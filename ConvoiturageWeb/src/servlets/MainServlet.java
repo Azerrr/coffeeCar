@@ -170,8 +170,8 @@ public class MainServlet extends HttpServlet {
 		String date = request.getParameter("date");
 		String heure = request.getParameter("time");
 		String vDepart = request.getParameter("villeDepart");
-		String vArrive = request.getParameter("villeArrive");
-		int tarifTotal = Integer.parseInt(request.getParameter("tarif"));
+		//String vArrive = request.getParameter("villeArrive");
+		//int tarifTotal = Integer.parseInt(request.getParameter("tarif"));
 		String etape1 = request.getParameter("etape1");
 		String etape2 = request.getParameter("etape2");
 		String etape3 = request.getParameter("etape3");
@@ -197,7 +197,7 @@ public class MainServlet extends HttpServlet {
 		int nbplaces = Integer.parseInt(request.getParameter("placesLibres"));
 		
 		if(currentLogin != null) {
-			facade.addTrajet(currentLogin, vDepart, vArrive, etapes, date, heure, tarifTotal, nbplaces, type, modele);
+			facade.addTrajet(currentLogin, vDepart, etapes, date, heure, nbplaces, type, modele);
 			request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
 		}
 						

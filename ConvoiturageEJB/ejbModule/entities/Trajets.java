@@ -20,8 +20,8 @@ public class Trajets {
 	@JoinTable(name="Reservations")
 	private Utilisateur passagers;
 	private String villeDepart;
-	private String villeArrive;
-	private int tarifTotal;
+	//private String villeArrive;
+	//private int tarifTotal;
 	@OneToMany
 	private List<Etape> etapes;
 	private String date;
@@ -37,12 +37,12 @@ public class Trajets {
 		this.id = id;
 	}
 	
-	public int getTarifTotal() {
+	/*public int getTarifTotal() {
 		return tarifTotal;
 	}
 	public void setTarifTotal(int tarifTotal) {
 		this.tarifTotal = tarifTotal;
-	}
+	}*/
 	public Utilisateur getConducteur() {
 		return conducteur;
 	}
@@ -69,12 +69,12 @@ public class Trajets {
 	public void setVilleDepart(String villeDepart) {
 		this.villeDepart = villeDepart;
 	}
-	public String getVilleArrive() {
+	/*public String getVilleArrive() {
 		return villeArrive;
 	}
 	public void setVilleArrive(String villeArrive) {
 		this.villeArrive = villeArrive;
-	}
+	}*/
 	public List<Etape> getEtapes() {
 		return etapes;
 	}

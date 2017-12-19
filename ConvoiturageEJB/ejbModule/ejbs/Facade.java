@@ -34,6 +34,9 @@ public class Facade {
 		Utilisateur u = (Utilisateur)res.getSingleResult();
 		List<Trajets> trajets = (List<Trajets>)u.getTrajets();
 		trajets.size();
+		for (Trajets tr : trajets) {
+			tr.getEtapes().size();
+		}
 		return trajets;
 	}
 	
@@ -86,26 +89,38 @@ public class Facade {
 	
 		
 	@SuppressWarnings("unchecked")
-	public ArrayList<String> findTrajets(String date, String villeDepart, String villeArrive) {
+	public ArrayList<Trajets> findTrajets(String date, String villeDepart, String villeArrive) {
 		// Requête paramétrée
 		Query q = em.createQuery("from Trajets t where t.date=:date"
 				+ " and t.villeDepart=:villeDepart"
-				+ " and t.villeArrive=:villeArrive"
 				+ " and t.nbPlaces > 0"
 				+ " order by t.heure");
 		q.setParameter("date", date);
-		q.setParameter("villeDepart", villeDepart);
-		q.setParameter("villeArrive", villeArrive);
-		return (ArrayList<String>)q.getResultList();
+		q.setParameter("villeDepart", villeDepart);		
+		ArrayList<Trajets> traj = (ArrayList<Trajets>)q.getResultList();
+		ArrayList<Trajets> res = new ArrayList<>();
+		
+		System.out.println("ville arrivée : " + villeArrive);
+		
+		for (Trajets tr : traj) {
+			for (int i = 0; i < 3; i++) {
+				System.out.println("étape " + i + " " + tr.getEtapes().get(i).getEtape());
+				if(tr.getEtapes().get(i).getEtape().equals(villeArrive)) { // Si le trajet contient l'étape souhaitée
+					res.add(tr);	// On l'ajoute aux résultats
+				}
+			}
+		}
+		System.out.println("traj size : " + traj.size());
+		return (ArrayList<Trajets>)res;
 	}
 	
-	public void addTrajet(String login, String villeDepart, String villeArrive, List<Etape> etapes,
-			String date, String heure, int tarif, int nbPlaces, String typeVehicule, String modele) {
+	public void addTrajet(String login, String villeDepart, List<Etape> etapes,
+			String date, String heure, int nbPlaces, String typeVehicule, String modele) {
 		// Récupérations des étapes en BDD
 		List<Etape> etps = new ArrayList<>();
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < etps.size(); i++) {
 			Etape etp = etapes.get(i);
-			if(etp.getEtape() != "default") {
+			if(etp.getEtape().equals("default")) {
 				em.persist(etp);
 				etps.add(etp);
 			}
@@ -118,8 +133,8 @@ public class Facade {
 		Trajets t = new Trajets();
 		t.setConducteur(u);
 		t.setVilleDepart(villeDepart);
-		t.setVilleArrive(villeArrive);
-		t.setTarifTotal(tarif);
+		//t.setVilleArrive(villeArrive);
+		//t.setTarifTotal(tarif);
 		t.setEtapes(etps);
 		t.setDate(date);
 		t.setHeure(heure);

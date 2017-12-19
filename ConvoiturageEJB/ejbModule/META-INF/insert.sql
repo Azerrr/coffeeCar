@@ -20,3 +20,13 @@ insert into Vehicule (type) values ('Break');
 insert into Vehicule (type) values ('Routiere');
 insert into Vehicule (type) values ('Fourgonnette');
 
+
+
+
+
+
+
+
+
+
+
