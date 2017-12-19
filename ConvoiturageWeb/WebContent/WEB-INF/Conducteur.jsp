@@ -58,20 +58,6 @@
 				</td>
 			</tr>
 			
-			<!--  <tr>
-				<td><label for="villeArrive">Ville Arrivé</label></td>
-				<td><select id="villeArrive" name="villeArrive" required="required">
-						<c:forEach items="${villes}" var="ci">
-    						<option>${ci.ville}</option>
-						</c:forEach>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td><label for="tarif">Tarifs total</label></td>
-				<td><input id="tarif" type="number" name="tarif" min="0" max="200" required="required"></td>
-			</tr>-->
-			
 			<tr>
 				<td><label>Etape 1</label></td>
 				<td>

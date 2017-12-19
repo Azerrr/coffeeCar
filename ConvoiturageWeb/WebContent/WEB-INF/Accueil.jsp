@@ -18,9 +18,6 @@
 </head>
 
 <body>
-	<form method="post">	
-		<button type='submit' name='task' value='initButton'>initButton</button>
-		</form>
 	
 	<% 
 	if(request.getSession().getAttribute("login") != null){
@@ -35,9 +32,6 @@
 		/*If admin*/
 		if((int)request.getSession().getAttribute("role") <= 1){
 		%>
-		<form method="post">	
-		<button type='submit' name='todo' value='initButton'>initButton</button>
-		</form>
 		<form method="post">
 			<button type='submit' name='todo' value='admin'>Page Administrateur</button>		
 		</form>
@@ -85,8 +79,8 @@
 				<tr>
 					<td><label for="villeDepart">Ville de Départ :</label></td>
 					<td><select id="villeDepart" name="villeDepart">
-						<c:forEach items="${villes}" var="ci">
-    						<option>${ci.ville}</option>
+						<c:forEach items="${villes}" var="vi">
+    						<option>${vi.ville}</option>
 						</c:forEach>
 						</select>
 					</td>
@@ -95,8 +89,8 @@
 				<tr>
 					<td><label for="villeArrive">Ville d'Arrivé :</label></td>
 					<td><select id="villeArrive" name="villeArrive">
-						<c:forEach items="${villes}" var="ci">
-    						<option>${ci.ville}</option>
+						<c:forEach items="${villes}" var="vi">
+    						<option>${vi.ville}</option>
 						</c:forEach>
 						</select>
 					</td>
@@ -131,22 +125,22 @@
 				<th>Modèle</th>
 			</tr>
 			
-			<c:forEach items="${resultatRecherche}" var="ci">
+			<c:forEach items="${resultatRecherche}" var="rech">
 			
 			<tr>
-				<td>${ci.date}</td>
-				<td>${ci.heure}</td>
-				<td>${ci.villeDepart}</td>
-				<td>${ci.etapes.get(0).getEtape()}</td>
-				<td>${ci.etapes.get(0).getTarif()} € </td>
-				<td>${ci.etapes.get(1).getEtape()}</td>
-				<td>${ci.etapes.get(1).getTarif()} € </td>
-				<td>${ci.etapes.get(2).getEtape()}</td>
-				<td>${ci.etapes.get(2).getTarif()} € </td>
-				<td>${ci.nbPlaces}</td>
-				<td>${ci.typeVehicule}</td>
-				<td>${ci.modele}</td>
-				<td><button type='submit' name='reservation' value='${ci.id}'>Réserver</button></td>
+				<td>${rech.date}</td>
+				<td>${rech.heure}</td>
+				<td>${rech.villeDepart}</td>
+				<td>${rech.etapes.get(0).getEtape()}</td>
+				<td>${rech.etapes.get(0).getTarif()} € </td>
+				<td>${rech.etapes.get(1).getEtape()}</td>
+				<td>${rech.etapes.get(1).getTarif()} € </td>
+				<td>${rech.etapes.get(2).getEtape()}</td>
+				<td>${rech.etapes.get(2).getTarif()} € </td>
+				<td>${rech.nbPlaces}</td>
+				<td>${rech.typeVehicule}</td>
+				<td>${rech.modele}</td>
+				<td><% if(request.getSession().getAttribute("login") != null){%><button type='submit' name='reservation' value='${rech.id}'>Réserver</button><%} %></td>
 			</tr>
 			</c:forEach>
 			</table>

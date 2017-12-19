@@ -45,7 +45,6 @@
 		
 			<c:forEach items="${trajetReserve}" var="ci">
 				<tr>
-					<td>${ci.id}</td>
 					<td>${ci.date}</td>
 					<td>${ci.heure}</td>
 					<td>${ci.villeDepart}</td>	
@@ -55,6 +54,7 @@
 					<td>${ci.etapes.get(1).getTarif()} € </td>
 					<td>${ci.etapes.get(2).getEtape()}</td>
 					<td>${ci.etapes.get(2).getTarif()} € </td>
+					<td>${ci.nbPlaces}</td>
 					<td>${ci.typeVehicule}</td>
 					<td>${ci.modele}</td>	
 				</tr>

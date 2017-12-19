@@ -17,16 +17,6 @@ public class Facade {
 	@PersistenceContext(unitName="monUnite")
 	EntityManager em;
 	
-	/*public void initdbTrajets() {
-
-		addTrajet("eric", "Bourges", "Paris", null, "2017-12-06", "04:04", 2, 1, "Urbaine", "twingo");
-		addTrajet("remi", "Bourges", "Paris", null, "2017-12-06", "05:04", 5, 2, "Urbaine", "twingo");
-		addTrajet("maxime", "Bourges", "Paris", null, "2017-12-06", "06:04", 3, 3, "Urbaine", "twingo");
-		addTrajet("guillaume", "Bourges", "Paris", null, "2017-12-06", "07:04", 4, 4, "Urbaine", "twingo");
-		addTrajet("eric", "Bourges", "Paris", null, "2017-12-06", "10:04", 8, 5, "Urbaine", "twingo");
-		addTrajet("eric", "Bourges", "Paris", null, "2017-12-06", "09:04", 4, 6, "Urbaine", "twingo");
-		
-	}*/
 	
 	public List<Trajets> getReservation(String login){
 		Query res =em.createQuery("from Utilisateur u where u.identifiant=:login");
@@ -99,18 +89,14 @@ public class Facade {
 		q.setParameter("villeDepart", villeDepart);		
 		ArrayList<Trajets> traj = (ArrayList<Trajets>)q.getResultList();
 		ArrayList<Trajets> res = new ArrayList<>();
-		
-		System.out.println("ville arrivée : " + villeArrive);
-		
+				
 		for (Trajets tr : traj) {
 			for (int i = 0; i < tr.getEtapes().size(); i++) {
-				System.out.println("étape " + i + " " + tr.getEtapes().get(i).getEtape());
 				if(tr.getEtapes().get(i).getEtape().equals(villeArrive)) { // Si le trajet contient l'étape souhaitée
 					res.add(tr);	// On l'ajoute aux résultats
 				}
 			}
 		}
-		System.out.println("traj size : " + traj.size());
 		return (ArrayList<Trajets>)res;
 	}
 	
@@ -133,8 +119,6 @@ public class Facade {
 		Trajets t = new Trajets();
 		t.setConducteur(u);
 		t.setVilleDepart(villeDepart);
-		//t.setVilleArrive(villeArrive);
-		//t.setTarifTotal(tarif);
 		t.setEtapes(etps);
 		t.setDate(date);
 		t.setHeure(heure);
@@ -156,7 +140,7 @@ public class Facade {
 		Trajets t = (Trajets)trajetfind.getSingleResult();
 		
 		t.setPassagers(u);
-		t.setNbPlaces(0);
+		t.setNbPlaces(t.getNbPlaces()-1);
 		em.persist(t);
 	}
 		

@@ -59,9 +59,6 @@ public class MainServlet extends HttpServlet {
 		
 		if(task != null) {
 			switch(task) {
-				case "initButton":
-					//facade.initdbTrajets();
-					break;
 				case "rechercheTrajet":
 					findTrajet(request, response);
 					break;	
@@ -136,11 +133,6 @@ public class MainServlet extends HttpServlet {
 			case "addTrajet":
 				addTrajet(request, response);
 				break;
-			case "initButton":
-				/*init Db trajets*/
-				//facade.initdbTrajets();
-				request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
-				break;
 			default:
 				request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
 				break;
@@ -170,8 +162,6 @@ public class MainServlet extends HttpServlet {
 		String date = request.getParameter("date");
 		String heure = request.getParameter("time");
 		String vDepart = request.getParameter("villeDepart");
-		//String vArrive = request.getParameter("villeArrive");
-		//int tarifTotal = Integer.parseInt(request.getParameter("tarif"));
 		String etape1 = request.getParameter("etape1");
 		String etape2 = request.getParameter("etape2");
 		String etape3 = request.getParameter("etape3");
@@ -192,8 +182,6 @@ public class MainServlet extends HttpServlet {
 		etapes.add(etp2);
 		etapes.add(etp3);
 		
-		//ArrayList<Integer> tarif = new ArrayList<Integer>();
-		//tarif.add(Integer.parseInt(request.getParameter("tarif")));
 		int nbplaces = Integer.parseInt(request.getParameter("placesLibres"));
 		
 		if(currentLogin != null) {
