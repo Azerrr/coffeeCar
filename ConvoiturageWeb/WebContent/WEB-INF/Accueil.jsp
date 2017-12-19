@@ -14,6 +14,9 @@
 		border-style: solid;
     	border-width: 0px 0px 1px 1px;
 	}
+	th:first-child, td:first-child{
+    	border-width: 0px 0px 1px 0px;
+	}
 </style>
 </head>
 
@@ -104,7 +107,7 @@
 		
 		</form>
 		
-		
+		<br/>
 		<div>
 			<jsp:useBean id="resultatRecherche" type="java.util.ArrayList<String>" scope="request" />
 			<form method="post">
@@ -140,7 +143,7 @@
 				<td>${rech.nbPlaces}</td>
 				<td>${rech.typeVehicule}</td>
 				<td>${rech.modele}</td>
-				<td><% if(request.getSession().getAttribute("login") != null){%><button type='submit' name='reservation' value='${rech.id}'>Réserver</button><%} %></td>
+				<% if(request.getSession().getAttribute("login") != null){%><td><button type='submit' name='reservation' value='${rech.id}'>Réserver</button></td><%} %>
 			</tr>
 			</c:forEach>
 			</table>

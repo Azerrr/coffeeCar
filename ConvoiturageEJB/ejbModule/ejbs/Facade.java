@@ -104,9 +104,10 @@ public class Facade {
 			String date, String heure, int nbPlaces, String typeVehicule, String modele) {
 		// Récupérations des étapes en BDD
 		List<Etape> etps = new ArrayList<>();
-		for (int i = 0; i < etps.size(); i++) {
+		for (int i = 0; i < etapes.size(); i++) {
 			Etape etp = etapes.get(i);
-			if(etp.getEtape().equals("default")) {
+			System.out.println(etp.getEtape());
+			if(!etp.getEtape().equals("default")) {
 				em.persist(etp);
 				etps.add(etp);
 			}

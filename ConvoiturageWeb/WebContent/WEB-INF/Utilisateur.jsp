@@ -14,6 +14,10 @@
 				border-style: solid;
     			border-width: 0px 0px 1px 1px;
 			}
+			
+			th:first-child, td:first-child{
+    			border-width: 0px 0px 1px 0px;
+			}
 		</style>
 	</head>
 	
@@ -43,20 +47,20 @@
 			</tr>
 		
 		
-			<c:forEach items="${trajetReserve}" var="ci">
+			<c:forEach items="${trajetReserve}" var="tr">
 				<tr>
-					<td>${ci.date}</td>
-					<td>${ci.heure}</td>
-					<td>${ci.villeDepart}</td>	
-					<td>${ci.etapes.get(0).getEtape()}</td>
-					<td>${ci.etapes.get(0).getTarif()} € </td>
-					<td>${ci.etapes.get(1).getEtape()}</td>
-					<td>${ci.etapes.get(1).getTarif()} € </td>
-					<td>${ci.etapes.get(2).getEtape()}</td>
-					<td>${ci.etapes.get(2).getTarif()} € </td>
-					<td>${ci.nbPlaces}</td>
-					<td>${ci.typeVehicule}</td>
-					<td>${ci.modele}</td>	
+					<td>${tr.date}</td>
+					<td>${tr.heure}</td>
+					<td>${tr.villeDepart}</td>	
+					<td>${tr.etapes.get(0).getEtape()}</td>
+					<td>${tr.etapes.get(0).getTarif()} € </td>
+					<td>${tr.etapes.get(1).getEtape()}</td>
+					<td>${tr.etapes.get(1).getTarif()} € </td>
+					<td>${tr.etapes.get(2).getEtape()}</td>
+					<td>${tr.etapes.get(2).getTarif()} € </td>
+					<td>${tr.nbPlaces}</td>
+					<td>${tr.typeVehicule}</td>
+					<td>${tr.modele}</td>	
 				</tr>
 			</c:forEach>
 		</table>
