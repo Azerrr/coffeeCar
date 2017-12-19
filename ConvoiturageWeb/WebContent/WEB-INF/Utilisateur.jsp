@@ -8,6 +8,13 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Utilisateur</title>
+		
+		<style>
+			th, td{
+				border-style: solid;
+    			border-width: 0px 0px 1px 1px;
+			}
+		</style>
 	</head>
 	
 	<body>
@@ -20,6 +27,22 @@
 		<jsp:useBean id="trajetReserve" type="java.util.List<String>" scope="request" />
 			
 		<table>
+			<tr>
+				<th>Date</th>
+				<th>Heure</th>
+				<th>Départ</th>
+				<th>Etape 1</th>
+				<th>Tarif 1</th>
+				<th>Etape 2</th>
+				<th>Tarif 2</th>
+				<th>Etape 3</th>
+				<th>Tarif 3</th>
+				<th>Places Libres</th>
+				<th>Gabarit</th>
+				<th>Modèle</th>
+			</tr>
+		
+		
 			<c:forEach items="${trajetReserve}" var="ci">
 				<tr>
 					<td>${ci.id}</td>

@@ -103,7 +103,7 @@ public class Facade {
 		System.out.println("ville arrivée : " + villeArrive);
 		
 		for (Trajets tr : traj) {
-			for (int i = 0; i < 3; i++) {
+			for (int i = 0; i < tr.getEtapes().size(); i++) {
 				System.out.println("étape " + i + " " + tr.getEtapes().get(i).getEtape());
 				if(tr.getEtapes().get(i).getEtape().equals(villeArrive)) { // Si le trajet contient l'étape souhaitée
 					res.add(tr);	// On l'ajoute aux résultats
